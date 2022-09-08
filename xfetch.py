@@ -67,7 +67,7 @@ print(CBLUE + "Uptime: " + CRESET + uptime)
 if distro == "Fedora Linux" or "Red Hat Enterprise Linux" or "CentOS":
     print(CBLUE + "Packages: " + CRESET + packages + " (rpm)")
 elif distro == "Arch Linux" or "EndeavourOS" or "Manjaro":
-    print(CBLUE + "Packages: " + CRESET + packages + " (rpm)")
+    print(CBLUE + "Packages: " + CRESET + packages + " (pacman)")
 
 print(CBLUE + "Shell: " + CRESET + shell)
 
