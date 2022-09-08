@@ -29,6 +29,93 @@ CBEIGE = '\33[36m'
 CWHITE = '\33[37m'
 CRESET = '\33[0m'
 
+fedora_ascii = r"""
+      _____
+     /   __)\
+     |  /  \ \
+  ___|  |__/ /
+ / (_    _)_/
+/ /  |  |
+\ \__/  |
+ \(_____/
+"""
+
+rhel_ascii = """
+              _ _           _   
+             | | |         | |  
+ _ __ ___  __| | |__   __ _| |_ 
+| '__/ _ \/ _` | '_ \ / _` | __|
+| | |  __/ (_| | | | | (_| | |_ 
+|_|  \___|\__,_|_| |_|\__,_|\__|
+"""
+
+centos_ascii = """
+                 ..
+               .PLTJ.
+              <><><><>
+     KKSSV' 4KKK LJ KKKL.'VSSKK
+     KKV' 4KKKKK LJ KKKKAL 'VKK
+     V' ' 'VKKKK LJ KKKKV' ' 'V
+     .4MA.' 'VKK LJ KKV' '.4Mb.
+   . KKKKKA.' 'V LJ V' '.4KKKKK .
+ .4D KKKKKKKA.'' LJ ''.4KKKKKKK FA.
+<QDD ++++++++++++  ++++++++++++ GFD>
+ 'VD KKKKKKKK'.. LJ ..'KKKKKKKK FV
+   ' VKKKKK'. .4 LJ K. .'KKKKKV '
+      'VK'. .4KK LJ KKA. .'KV'
+     A. . .4KKKK LJ KKKKA. . .4
+     KKA. 'KKKKK LJ KKKKK' .4KK
+     KKSSA. VKKK LJ KKKV .4SSKK
+              <><><><>
+               'MKKM'
+                 ''
+"""
+
+suse_ascii = r"""
+  _______
+__|   __ \
+     / .\ \
+     \__/ |
+   _______|
+   \_______
+__________/
+"""
+
+arch_ascii = r"""
+      /\
+     /  \
+    /\   \
+   /      \
+  /   ,,   \
+ /   |  |  -\
+/_-''    ''-_\
+"""
+
+manjaro_ascii = """
+||||||||| ||||
+||||||||| ||||
+||||      ||||
+|||| |||| ||||
+|||| |||| ||||
+|||| |||| ||||
+|||| |||| ||||
+"""
+
+penguin_ascii = """
+        #####
+       #######
+       ##O#O##
+       #######
+     ###########
+    #############
+   ###############
+   ################
+  #################
+#####################
+#####################
+  #################
+"""
+
 username = os.getlogin()
 
 hostname = socket.gethostname()
@@ -42,6 +129,28 @@ except IndexError:
 
 distro = distro.name()
 
+if distro == "Fedora Linux":
+    ascii = fedora_ascii
+    asciicolor = CBLUE
+elif distro == "Red Hat Enterprise Linux":
+    ascii = rhel_ascii
+    asciicolor = CRED
+elif distro == "CentOS":
+    ascii = centos_ascii
+    asciicolor = CVIOLET
+elif distro == "openSUSE":
+    ascii = suse_ascii
+    asciicolor = CGREEN
+elif distro == "Arch Linux" or "EndeavourOS":
+    ascii = arch_ascii
+    asciicolor = CBLUE
+elif distro == "Manjaro Linux":
+    ascii = manjaro_ascii
+    asciicolor = CGREEN
+else:
+    ascii = penguin_ascii
+    asciicolor = CRESET
+
 kernel = platform.release()
 
 uptime = os.popen('uptime -p | cut -b 4-').read()[:-1]
@@ -50,7 +159,7 @@ cpu = cpuinfo.get_cpu_info()['brand_raw']
 
 if distro == "Fedora Linux" or "Red Hat Enterprise Linux" or "CentOS" or "openSUSE":
     packages = os.popen('yum list installed | wc -l').read()[:-1]
-elif distro == "Arch Linux" or "EndeavourOS" or "Manjaro":
+elif distro == "Arch Linux" or "EndeavourOS" or "Manjaro Linux":
     packages = os.popen('pacman -Qq | wc -l').read()[:-1]
 else:
     packages = False
@@ -68,6 +177,8 @@ gpu = os.popen('lspci | grep " VGA " | cut -b 36-').read()[:-1]
 ramamount = os.popen('free -h | grep Mem: | cut -b 16- | cut -b -5').read()[:-1]
 
 ramused = os.popen('free -h | grep Mem: | cut -b 28- | cut -b -5').read()[:-1]
+
+print(asciicolor + ascii + CRESET)
 
 print(CBLUE + username + CGREEN + "@" + CYELLOW + hostname)
 
