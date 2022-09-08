@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #
-# This file is a part of xfetch; you can redistrubute, modify, or spread this work.# You may not sell this work under any given circumstances.
+# This file is a part of xfetch; you can redistrubute, modify, or spread this work.
+# You may not sell this work under any given circumstances.
 
 import platform
 import sys
