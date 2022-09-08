@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 #
-# This file is a part of xfetch; you can redistrubute, modify, or spread this work.
-# You may not sell this work under any given circumstances.
+# This file is a part of xfetch; you can redistrubute, modify, or spread this work.# You may not sell this work under any given circumstances.
 
 import platform
 import sys
@@ -65,8 +64,10 @@ print(CBLUE + "Kernel: " + CRESET + kernel)
 
 print(CBLUE + "Uptime: " + CRESET + uptime)
 
-if packages != False:
-    print(CBLUE + "Packages: " + CRESET + packages)
+if distro == "Fedora Linux" or "Red Hat Enterprise Linux" or "CentOS":
+    print(CBLUE + "Packages: " + CRESET + packages + " (rpm)")
+elif distro == "Arch Linux" or "EndeavourOS" or "Manjaro":
+    print(CBLUE + "Packages: " + CRESET + packages + " (rpm)")
 
 print(CBLUE + "Shell: " + CRESET + shell)
 
