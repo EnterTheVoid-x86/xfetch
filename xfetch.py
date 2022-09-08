@@ -141,9 +141,12 @@ elif distro == "CentOS":
 elif distro == "openSUSE":
     ascii = suse_ascii
     asciicolor = CGREEN
-elif distro == "Arch Linux" or "EndeavourOS":
+elif distro == "Arch Linux":
     ascii = arch_ascii
     asciicolor = CBLUE
+elif distro == "EndeavourOS":
+    ascii = arch_ascii
+    asciicolor = CVIOLET
 elif distro == "Manjaro Linux":
     ascii = manjaro_ascii
     asciicolor = CGREEN
