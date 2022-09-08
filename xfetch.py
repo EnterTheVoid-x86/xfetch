@@ -47,7 +47,7 @@ uptime = os.popen('uptime -p | cut -b 4-').read()[:-1]
 
 cpu = cpuinfo.get_cpu_info()['brand_raw']
 
-if distro == "Fedora Linux" or "Red Hat Enterprise Linux" or "CentOS":
+if distro == "Fedora Linux" or "Red Hat Enterprise Linux" or "CentOS" or "openSUSE":
     packages = os.popen('yum list installed | wc -l').read()[:-1]
 elif distro == "Arch Linux" or "EndeavourOS" or "Manjaro":
     packages = os.popen('pacman -Qq | wc -l').read()[:-1]
@@ -64,7 +64,7 @@ print(CBLUE + "Kernel: " + CRESET + kernel)
 
 print(CBLUE + "Uptime: " + CRESET + uptime)
 
-if distro == "Fedora Linux" or "Red Hat Enterprise Linux" or "CentOS":
+if distro == "Fedora Linux" or "Red Hat Enterprise Linux" or "CentOS" or "openSUSE":
     print(CBLUE + "Packages: " + CRESET + packages + " (rpm)")
 elif distro == "Arch Linux" or "EndeavourOS" or "Manjaro":
     print(CBLUE + "Packages: " + CRESET + packages + " (pacman)")
