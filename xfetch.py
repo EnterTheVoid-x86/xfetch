@@ -16,7 +16,8 @@ except ModuleNotFoundError:
     print("Installing the cpuinfo module...")
     print("CPUINFO: Provides the CPU Model Name.")
     os.system("pip install py-cpuinfo")
-    import cpuinfo
+    print("Please now re-run xfetch.")
+    exit
 
 CBLACK = '\33[30m'
 CRED = '\33[31m'
@@ -54,7 +55,19 @@ elif distro == "Arch Linux" or "EndeavourOS" or "Manjaro":
 else:
     packages = False
 
-shell = os.popen('echo $SHELL | cut -b 10-').read()[:-1]
+shell = os.popen('echo $SHELL').read()[:-1]
+
+shell1 = os.popen('echo $SHELL | cut -b 6-').read()[:-1]
+
+shell2 = os.popen('echo $SHELL | cut -b 10-').read()[:-1]
+
+bashcheck = shell.startswith('/bin')
+
+gpu = os.popen('lspci | grep " VGA " | cut -b 36-').read()[:-1]
+
+ramamount = os.popen('free -h | grep Mem: | cut -b 16- | cut -b -5').read()[:-1]
+
+ramused = os.popen('free -h | grep Mem: | cut -b 28- | cut -b -5').read()[:-1]
 
 print(CBLUE + username + CGREEN + "@" + CYELLOW + hostname)
 
@@ -69,9 +82,16 @@ if distro == "Fedora Linux" or "Red Hat Enterprise Linux" or "CentOS" or "openSU
 elif distro == "Arch Linux" or "EndeavourOS" or "Manjaro":
     print(CBLUE + "Packages: " + CRESET + packages + " (pacman)")
 
-print(CBLUE + "Shell: " + CRESET + shell)
+if bashcheck == True:
+    print(CBLUE + "Shell: " + CRESET + shell1)
+else:
+    print(CBLUE + "Shell: " + CRESET + shell2)
 
 if wmname != False:
     print(CBLUE + "Window Manager: " + CRESET + wmname)
 
 print(CBLUE + "CPU: " + CRESET + cpu)
+
+print(CBLUE + "GPU: " + CRESET + gpu)
+
+print(CBLUE + "Memory Usage: " + CRESET + ramused + "/" + ramamount)
